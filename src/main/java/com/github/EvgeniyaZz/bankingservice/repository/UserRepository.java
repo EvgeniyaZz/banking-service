@@ -12,6 +12,9 @@ import static com.github.EvgeniyaZz.bankingservice.config.LoginSecurityConfigura
 @Transactional(readOnly = true)
 public interface UserRepository extends BaseRepository<User> {
 
+    @Query("SELECT u FROM User u JOIN FETCH u.userDetail WHERE u.id = :id")
+    Optional<User> findWithDetail(int id);
+
     @Query("SELECT u FROM User u WHERE u.login = :login")
     Optional<User> findByLogin(String login);
 

@@ -12,7 +12,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "user")
 @Setter
 @Getter
 @NoArgsConstructor

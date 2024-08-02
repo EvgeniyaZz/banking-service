@@ -3,8 +3,6 @@ package com.github.EvgeniyaZz.bankingservice.web;
 import com.github.EvgeniyaZz.bankingservice.model.User;
 import com.github.EvgeniyaZz.bankingservice.service.UserService;
 import com.github.EvgeniyaZz.bankingservice.to.UserTo;
-import com.github.EvgeniyaZz.bankingservice.util.UserUtil;
-import com.github.EvgeniyaZz.bankingservice.web.user.AbstractUserController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

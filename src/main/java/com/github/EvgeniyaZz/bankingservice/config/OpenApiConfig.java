@@ -1,9 +1,7 @@
 package com.github.EvgeniyaZz.bankingservice.config;
 
-import com.github.EvgeniyaZz.bankingservice.model.Account;
-import com.github.EvgeniyaZz.bankingservice.model.Mail;
-import com.github.EvgeniyaZz.bankingservice.model.Phone;
-import com.github.EvgeniyaZz.bankingservice.model.User;
+import com.github.EvgeniyaZz.bankingservice.model.*;
+import com.github.EvgeniyaZz.bankingservice.to.UserDetailTo;
 import com.github.EvgeniyaZz.bankingservice.to.UserTo;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.models.Components;
@@ -52,9 +50,11 @@ public class OpenApiConfig {
                             .components(new Components()
                                     .addSchemas("User", ModelConverters.getInstance().readAllAsResolvedSchema(User.class).schema)
                                     .addSchemas("Account", ModelConverters.getInstance().readAllAsResolvedSchema(Account.class).schema)
+                                    .addSchemas("UserDetail", ModelConverters.getInstance().readAllAsResolvedSchema(UserDetail.class).schema)
                                     .addSchemas("Mail", ModelConverters.getInstance().readAllAsResolvedSchema(Mail.class).schema)
                                     .addSchemas("Phone", ModelConverters.getInstance().readAllAsResolvedSchema(Phone.class).schema)
                                     .addSchemas("UserTo", ModelConverters.getInstance().readAllAsResolvedSchema(UserTo.class).schema)
+                                    .addSchemas("UserDetailTo", ModelConverters.getInstance().readAllAsResolvedSchema(UserDetailTo.class).schema)
                                     .addSecuritySchemes("Authorization", new SecurityScheme()
                                             .in(SecurityScheme.In.HEADER)
                                             .type(SecurityScheme.Type.HTTP)

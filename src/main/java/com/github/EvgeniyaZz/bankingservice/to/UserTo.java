@@ -36,7 +36,8 @@ public class UserTo extends BaseTo implements HasIdAndLogin {
 
     int account;
 
-    public UserTo(String login, String password, String number, String email, int account) {
+    public UserTo(Integer id, String login, String password, String number, String email, int account) {
+        super(id);
         this.login = login;
         this.password = password;
         this.number = number;

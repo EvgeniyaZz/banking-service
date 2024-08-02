@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "user")
 @Setter
 @Getter
 @NoArgsConstructor

@@ -8,19 +8,14 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Setter
 @Getter
 @Entity
-@ToString(callSuper = true, exclude = {"password", "mails", "phones"})
 @NoArgsConstructor
 @Table(name = "users")
 public class User extends AbstractBaseEntity implements HasIdAndLogin {
@@ -72,7 +67,22 @@ public class User extends AbstractBaseEntity implements HasIdAndLogin {
         setRoles(List.of(role));
     }
 
+    public User(Integer id, String login, String password, Role... roles) {
+        super(id);
+        this.login = login;
+        this.password = password;
+        setRoles(Arrays.asList(roles));
+    }
+
     public void setRoles(Collection<Role> roles) {
         this.roles = roles.isEmpty() ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                '}';
     }
 }

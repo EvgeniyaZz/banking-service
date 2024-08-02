@@ -21,8 +21,7 @@ VALUES (1000, 1),
 
 INSERT INTO user_detail (firstname, lastname, middlename, birth_date, user_id)
 VALUES ('Захарова', 'Евгения', 'Владимировна', '1992-02-19', 1),
-       ('Иванов', 'Иван', 'Иванович', '1971-11-02', 2),
-       ('Адрианов', 'Сергей', 'Сергеевич', '1959-01-30', 3);
+       ('Иванов', 'Иван', 'Иванович', '1971-11-02', 2);
 
 INSERT INTO user_role (role, user_id)
 VALUES ('USER', 1),
