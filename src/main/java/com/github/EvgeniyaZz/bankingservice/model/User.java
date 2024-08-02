@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -47,11 +45,11 @@ public class User extends AbstractBaseEntity implements HasIdAndLogin {
     @JsonManagedReference(value = "user-phone")
     private List<Phone> phones;
 
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @Fetch(value = FetchMode.SELECT)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
     private Account account;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    private UserDetail userDetail;
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_role",
@@ -67,11 +65,10 @@ public class User extends AbstractBaseEntity implements HasIdAndLogin {
         this.password = password;
     }
 
-    public User(Integer id, String login, String password, Account account, Role role) {
+    public User(Integer id, String login, String password, Role role) {
         super(id);
         this.login = login;
         this.password = password;
-        this.account = account;
         setRoles(List.of(role));
     }
 

@@ -3,20 +3,26 @@ SET REFERENTIAL_INTEGRITY FALSE ;
 TRUNCATE TABLE user_role RESTART IDENTITY;
 TRUNCATE TABLE mail RESTART IDENTITY;
 TRUNCATE TABLE phone RESTART IDENTITY;
-TRUNCATE TABLE users RESTART IDENTITY;
+TRUNCATE TABLE user_detail RESTART IDENTITY;
 TRUNCATE TABLE account RESTART IDENTITY;
+TRUNCATE TABLE users RESTART IDENTITY;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-INSERT INTO account (account)
-VALUES (1000),
-       (500),
-       (750);
+INSERT INTO users (login, password)
+VALUES ('User', '{noop}password'),
+       ('Admin', '{noop}admin'),
+       ('User2', '{noop}user2');
 
-INSERT INTO users (login, password, account_id)
-VALUES ('User', '{noop}password', 1),
-       ('Admin', '{noop}admin', 2),
-       ('User2', '{noop}user2', 3);
+INSERT INTO account (account, user_id)
+VALUES (1000, 1),
+       (500, 2),
+       (750, 3);
+
+INSERT INTO user_detail (firstname, lastname, middlename, birth_date, user_id)
+VALUES ('Захарова', 'Евгения', 'Владимировна', '1992-02-19', 1),
+       ('Иванов', 'Иван', 'Иванович', '1971-11-02', 2),
+       ('Адрианов', 'Сергей', 'Сергеевич', '1959-01-30', 3);
 
 INSERT INTO user_role (role, user_id)
 VALUES ('USER', 1),

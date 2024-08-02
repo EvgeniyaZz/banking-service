@@ -1,9 +1,7 @@
 package com.github.EvgeniyaZz.bankingservice.model;
 
 import com.github.EvgeniyaZz.bankingservice.HasId;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,12 +20,12 @@ public class Account extends AbstractBaseEntity implements HasId {
     @Range(min = 0)
     private int account;
 
-    public Account(int account) {
-        this.account = account;
-    }
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private User user;
 
-    public Account(Integer id, int account) {
-        super(id);
+    public Account(int account, User user) {
         this.account = account;
+        this.user = user;
     }
 }

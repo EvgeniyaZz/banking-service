@@ -1,10 +1,7 @@
 package com.github.EvgeniyaZz.bankingservice.service;
 
 import com.github.EvgeniyaZz.bankingservice.model.*;
-import com.github.EvgeniyaZz.bankingservice.repository.AccountRepository;
-import com.github.EvgeniyaZz.bankingservice.repository.MailRepository;
-import com.github.EvgeniyaZz.bankingservice.repository.PhoneRepository;
-import com.github.EvgeniyaZz.bankingservice.repository.UserRepository;
+import com.github.EvgeniyaZz.bankingservice.repository.*;
 import com.github.EvgeniyaZz.bankingservice.to.UserTo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +20,8 @@ public class UserService {
 
     @Transactional
     public User save(UserTo userTo) {
-        Account account = accountRepository.save(new Account(userTo.getAccount()));
-        User user = userRepository.save(new User(null, userTo.getLogin(), PASSWORD_ENCODER.encode(userTo.getPassword()), account, Role.USER));
+        User user = userRepository.save(new User(null, userTo.getLogin(), PASSWORD_ENCODER.encode(userTo.getPassword()), Role.USER));
+        accountRepository.save(new Account(userTo.getAccount(), user));
         mailRepository.save(new Mail(userTo.getEmail(), user));
         phoneRepository.save(new Phone(userTo.getNumber(), user));
         return user;
