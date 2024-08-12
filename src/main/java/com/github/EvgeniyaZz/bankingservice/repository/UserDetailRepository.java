@@ -12,10 +12,10 @@ import static com.github.EvgeniyaZz.bankingservice.util.UserDetailUtil.createNew
 public interface UserDetailRepository extends BaseRepository<UserDetail> {
 
     @Transactional
-    default void saveNotExisted(UserDetailTo userDetailTo, User user) {
+    default UserDetail saveNotExisted(UserDetailTo userDetailTo, User user) {
         if(findById(user.getId()).isPresent()) {
             throw new IllegalRequestDataException("User details already exist");
         }
-        save(createNewFromTo(userDetailTo, user));
+        return save(createNewFromTo(userDetailTo, user));
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static com.github.EvgeniyaZz.bankingservice.web.user.UserTestData.*;
+import static com.github.EvgeniyaZz.bankingservice.UserTestData.*;
 
 class TokenControllerTest extends AbstractControllerTest {
 

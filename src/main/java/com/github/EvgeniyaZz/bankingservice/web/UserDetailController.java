@@ -6,17 +6,18 @@ import com.github.EvgeniyaZz.bankingservice.repository.UserDetailRepository;
 import com.github.EvgeniyaZz.bankingservice.to.UserDetailTo;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import static com.github.EvgeniyaZz.bankingservice.util.ValidationUtil.assureIdConsistent;
+import java.net.URI;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = DetailController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class DetailController extends AbstractController {
+@RequestMapping(value = UserDetailController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class UserDetailController extends AbstractController {
     static final String REST_URL = "/api/profile/detail";
 
     private final UserDetailRepository userDetailRepository;
@@ -27,13 +28,17 @@ public class DetailController extends AbstractController {
         return userDetailRepository.getExisted(jwtUser.id());
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public void save(@RequestBody @Valid UserDetailTo userDetailTo, JwtUser jwtUser) {
-        log.info("save user detail {}", userDetailTo);
-        assureIdConsistent(userDetailTo, jwtUser.id());
+    public ResponseEntity<UserDetail> createWithLocation(@RequestBody @Valid UserDetailTo userDetailTo, JwtUser jwtUser) {
+        log.info("create user detail {}", userDetailTo);
         User user = findByJwtUser(jwtUser);
-        userDetailRepository.saveNotExisted(userDetailTo, user);
+        UserDetail created = userDetailRepository.saveNotExisted(userDetailTo, user);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL)
+                .buildAndExpand(created.id())
+                .toUri();
+
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 }

@@ -1,9 +1,7 @@
 package com.github.EvgeniyaZz.bankingservice.to;
 
 import com.github.EvgeniyaZz.bankingservice.HasId;
-import com.github.EvgeniyaZz.bankingservice.util.NoHtml;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -13,17 +11,15 @@ import lombok.Value;
 @Value
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "Добавление/изменение email")
-public class MailTo extends BaseTo implements HasId {
+@Schema(description = "Добавление/изменение phone")
+public class PhoneTo extends BaseTo implements HasId {
 
-    @Email
     @NotBlank
-    @Size(max = 128)
-    @NoHtml
-    String email;
+    @Size(min = 7, max = 16)
+    String number;
 
-    public MailTo(Integer id, String email) {
+    public PhoneTo(Integer id, String number) {
         super(id);
-        this.email = email;
+        this.number = number;
     }
 }

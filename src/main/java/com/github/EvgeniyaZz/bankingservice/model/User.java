@@ -44,6 +44,7 @@ public class User extends AbstractBaseEntity implements HasIdAndLogin {
     private Account account;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "user-user_detail")
     private UserDetail userDetail;
 
     @Enumerated(EnumType.STRING)

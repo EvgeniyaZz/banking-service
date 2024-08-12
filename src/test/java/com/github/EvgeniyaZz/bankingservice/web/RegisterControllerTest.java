@@ -12,12 +12,11 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.github.EvgeniyaZz.bankingservice.web.RegisterController.REST_URL;
-import static com.github.EvgeniyaZz.bankingservice.web.user.UserTestData.USER_MATCHER;
+import static com.github.EvgeniyaZz.bankingservice.UserTestData.USER_MATCHER;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class RegisterControllerTest extends AbstractControllerTest{
-
 
     @Autowired
     private UserRepository userRepository;

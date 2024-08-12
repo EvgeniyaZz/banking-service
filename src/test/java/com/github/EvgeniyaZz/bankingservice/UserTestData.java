@@ -1,4 +1,4 @@
-package com.github.EvgeniyaZz.bankingservice.web.user;
+package com.github.EvgeniyaZz.bankingservice;
 
 import com.github.EvgeniyaZz.bankingservice.model.Role;
 import com.github.EvgeniyaZz.bankingservice.model.User;

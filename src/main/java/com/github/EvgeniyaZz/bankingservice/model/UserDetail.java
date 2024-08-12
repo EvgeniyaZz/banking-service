@@ -1,5 +1,6 @@
 package com.github.EvgeniyaZz.bankingservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.github.EvgeniyaZz.bankingservice.HasId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -41,7 +42,16 @@ public class UserDetail extends AbstractBaseEntity implements HasId {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
+    @JsonBackReference(value = "user-user_detail")
     private User user;
+
+    public UserDetail(Integer id, String firstname, String lastname, String middlename, LocalDate birthDate) {
+        super(id);
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.middlename = middlename;
+        this.birthDate = birthDate;
+    }
 
     public UserDetail(String firstname, String lastname, String middlename, LocalDate birthDate, User user) {
         this.firstname = firstname;
