@@ -5,6 +5,8 @@ import com.github.EvgeniyaZz.bankingservice.util.exception.NotFoundException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional(readOnly = true)
@@ -15,6 +17,9 @@ public interface UserRepository extends BaseRepository<User> {
 
     @Query("SELECT u FROM User u WHERE u.login = :login")
     Optional<User> findByLogin(String login);
+
+    @Query("SELECT u FROM User u WHERE u.userDetail.birthDate > :date")
+    List<User> filterByDate(LocalDate date);
 
     default User getExistedByLogin(String login) {
         return findByLogin(login).orElseThrow(() -> new NotFoundException("User with login=" + login + " not found"));
