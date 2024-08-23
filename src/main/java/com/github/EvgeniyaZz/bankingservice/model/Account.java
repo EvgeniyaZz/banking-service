@@ -16,16 +16,16 @@ import org.hibernate.validator.constraints.Range;
 @Table(name = "account")
 public class Account extends AbstractBaseEntity implements HasId {
 
-    @Column(name = "account", nullable = false)
+    @Column(name = "amount", nullable = false)
     @Range(min = 0)
-    private int account;
+    private int amount;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private User user;
 
-    public Account(int account, User user) {
-        this.account = account;
+    public Account(int amount, User user) {
+        this.amount = amount;
         this.user = user;
     }
 }

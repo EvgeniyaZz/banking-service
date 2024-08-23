@@ -34,14 +34,14 @@ public class UserTo extends BaseTo implements HasIdAndLogin {
     @NoHtml
     String email;
 
-    int account;
+    int amount;
 
-    public UserTo(Integer id, String login, String password, String number, String email, int account) {
+    public UserTo(Integer id, String login, String password, String number, String email, int amount) {
         super(id);
         this.login = login;
         this.password = password;
         this.number = number;
         this.email = email;
-        this.account = account;
+        this.amount = amount;
     }
 }

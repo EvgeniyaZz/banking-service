@@ -26,7 +26,7 @@ public class UserService {
     @Transactional
     public User save(UserTo userTo) {
         User user = userRepository.save(new User(null, userTo.getLogin(), PASSWORD_ENCODER.encode(userTo.getPassword()), Role.USER));
-        accountRepository.save(new Account(userTo.getAccount(), user));
+        accountRepository.save(new Account(userTo.getAmount(), user));
         mailRepository.save(new Mail(userTo.getEmail().toLowerCase(), user));
         phoneRepository.save(new Phone(userTo.getNumber(), user));
         return user;

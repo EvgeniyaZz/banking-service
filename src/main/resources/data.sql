@@ -14,7 +14,7 @@ VALUES ('User', '{noop}password'),
        ('Admin', '{noop}admin'),
        ('User2', '{noop}user2');
 
-INSERT INTO account (account, user_id)
+INSERT INTO account (amount, user_id)
 VALUES (1000, 1),
        (500, 2),
        (750, 3);
