@@ -41,6 +41,7 @@ public class User extends AbstractBaseEntity implements HasIdAndLogin {
     private List<Phone> phones;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "user-account")
     private Account account;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)

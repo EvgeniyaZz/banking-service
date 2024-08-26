@@ -40,4 +40,14 @@ public class Transfer extends AbstractBaseEntity implements HasId {
     @NotNull
     @JoinColumn(name = "account_to_id", nullable = false)
     private Account accountTo;
+
+    public Transfer(int amount) {
+        this.amount = amount;
+    }
+
+    public Transfer(int amount, Account accountFrom, Account accountTo) {
+        this.amount = amount;
+        this.accountFrom = accountFrom;
+        this.accountTo = accountTo;
+    }
 }

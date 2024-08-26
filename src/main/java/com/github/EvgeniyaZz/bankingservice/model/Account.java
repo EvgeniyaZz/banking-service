@@ -1,5 +1,6 @@
 package com.github.EvgeniyaZz.bankingservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.github.EvgeniyaZz.bankingservice.HasId;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Account extends AbstractBaseEntity implements HasId {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
+    @JsonBackReference(value = "user-account")
     private User user;
 
     public Account(int amount, User user) {

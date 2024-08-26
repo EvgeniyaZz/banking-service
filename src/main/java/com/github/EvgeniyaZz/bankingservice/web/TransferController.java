@@ -28,7 +28,7 @@ public class TransferController extends AbstractController {
     public ResponseEntity<Transfer> doTransfer(@RequestBody @Valid TransferTo transferTo, JwtUser jwtUser) {
         log.info("transfer {}", transferTo);
         User user = findByJwtUser(jwtUser);
-        Transfer transfer = transferService.doTransfer(transferTo, user);
+        Transfer transfer = transferService.doTransfer(transferTo, user.getAccount());
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(transfer.id())
