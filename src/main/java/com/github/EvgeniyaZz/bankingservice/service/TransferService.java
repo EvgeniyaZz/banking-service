@@ -19,15 +19,16 @@ public class TransferService {
 
     @Transactional
     public Transfer doTransfer(TransferTo transferTo, Account accountFrom){
-        if(accountFrom.getAmount() >= transferTo.getAmount()) {  // проверяем что денег достаточно на счете
+        int amount = transferTo.getAmount();
+        if(amount > 0 && amount <= accountFrom.getAmount()) {  // проверяем что денег достаточно на счете
             Account accountTo = accountRepository.getExisted(transferTo.getAccountToId()); //получаем счет куда переводим деньги
 
-            Transfer transfer = transferRepository.save(new Transfer(transferTo.getAmount(), accountFrom, accountTo)); // сохраняем информацию о переводе денег
+            Transfer transfer = transferRepository.save(new Transfer(amount, accountFrom, accountTo)); // сохраняем информацию о переводе денег
 
-            accountFrom.setAmount(accountFrom.getAmount() - transferTo.getAmount());
+            accountFrom.setAmount(accountFrom.getAmount() - amount);
             accountRepository.save(accountFrom); //списываем деньги
 
-            accountTo.setAmount(accountTo.getAmount() + transferTo.getAmount());
+            accountTo.setAmount(accountTo.getAmount() + amount);
             accountRepository.save(accountTo); //зачисляем деньги
 
             return transfer;
