@@ -19,7 +19,7 @@ VALUES (1000, 1),
        (500, 2),
        (750, 3);
 
-INSERT INTO user_detail (firstname, lastname, middlename, birth_date, user_id)
+INSERT INTO user_detail (lastname, firstname, middlename, birth_date, user_id)
 VALUES ('Захарова', 'Евгения', 'Владимировна', '1992-02-19', 1),
        ('Иванов', 'Иван', 'Иванович', '1971-11-02', 2);
 

@@ -3,6 +3,7 @@ package com.github.EvgeniyaZz.bankingservice.service;
 import com.github.EvgeniyaZz.bankingservice.model.*;
 import com.github.EvgeniyaZz.bankingservice.repository.*;
 import com.github.EvgeniyaZz.bankingservice.to.UserTo;
+import com.github.EvgeniyaZz.bankingservice.util.exception.IllegalRequestDataException;
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,8 +43,17 @@ public class UserService {
         return em.find(User.class, mail.getUser().getId());
     }
 
-    //TODO поиск по фио
     public List<User> getByName(String name) {
-        return null;
+        String[] fullname = name.split(" ");
+        if(fullname.length == 1) {
+            return userRepository.filterByName(fullname[0]);
+        }
+        if(fullname.length == 2) {
+            return userRepository.filterByName(fullname[0], fullname[1]);
+        }
+        if(fullname.length == 3) {
+            return userRepository.filterByName(fullname[0], fullname[1], fullname[2]);
+        }
+        throw new IllegalRequestDataException("invalid request");
     }
 }

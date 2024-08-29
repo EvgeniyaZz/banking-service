@@ -21,6 +21,15 @@ public interface UserRepository extends BaseRepository<User> {
     @Query("SELECT u FROM User u WHERE u.userDetail.birthDate > :date")
     List<User> filterByDate(LocalDate date);
 
+    @Query("SELECT u FROM User u WHERE u.userDetail.lastname LIKE :name% OR u.userDetail.firstname LIKE :name% OR u.userDetail.middlename LIKE :name%")
+    List<User> filterByName(String name);
+
+    @Query("SELECT u FROM User u WHERE u.userDetail.lastname LIKE :lastname% AND u.userDetail.firstname LIKE :firstname%")
+    List<User> filterByName(String lastname, String firstname);
+
+    @Query("SELECT u FROM User u WHERE u.userDetail.lastname LIKE :lastname% AND u.userDetail.firstname LIKE :firstname% AND u.userDetail.middlename LIKE :middlename%")
+    List<User> filterByName(String lastname, String firstname, String middlename);
+
     default User getExistedByLogin(String login) {
         return findByLogin(login).orElseThrow(() -> new NotFoundException("User with login=" + login + " not found"));
     }

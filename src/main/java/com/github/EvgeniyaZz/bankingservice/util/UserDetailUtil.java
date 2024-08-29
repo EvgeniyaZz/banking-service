@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 public class UserDetailUtil {
 
     public static UserDetail createNewFromTo(UserDetailTo userDetailTo, User user) {
-        return new UserDetail(userDetailTo.getFirstname(), userDetailTo.getLastname(), userDetailTo.getMiddlename(),
+        return new UserDetail(userDetailTo.getLastname(), userDetailTo.getFirstname(), userDetailTo.getMiddlename(),
                 userDetailTo.getBirthDate(), user);
     }
 }

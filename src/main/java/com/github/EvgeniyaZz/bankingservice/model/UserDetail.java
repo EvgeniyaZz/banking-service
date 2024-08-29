@@ -45,17 +45,17 @@ public class UserDetail extends AbstractBaseEntity implements HasId {
     @JsonBackReference(value = "user-user_detail")
     private User user;
 
-    public UserDetail(Integer id, String firstname, String lastname, String middlename, LocalDate birthDate) {
+    public UserDetail(Integer id, String lastname, String firstname, String middlename, LocalDate birthDate) {
         super(id);
-        this.firstname = firstname;
         this.lastname = lastname;
+        this.firstname = firstname;
         this.middlename = middlename;
         this.birthDate = birthDate;
     }
 
-    public UserDetail(String firstname, String lastname, String middlename, LocalDate birthDate, User user) {
-        this.firstname = firstname;
+    public UserDetail( String lastname, String firstname,String middlename, LocalDate birthDate, User user) {
         this.lastname = lastname;
+        this.firstname = firstname;
         this.middlename = middlename;
         this.birthDate = birthDate;
         this.user = user;

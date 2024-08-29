@@ -41,4 +41,13 @@ class UserControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(USER_MATCHER.contentJson(userWithoutDetail));
     }
+
+    @Test
+    void getByName() throws Exception {
+        performJwt(MockMvcRequestBuilders.get(REST_URL + "/by-name?name=" + "Евгения"), user)
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(USER_MATCHER.contentJson(List.of(user)));
+    }
 }
