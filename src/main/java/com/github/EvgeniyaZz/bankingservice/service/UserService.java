@@ -44,15 +44,9 @@ public class UserService {
     }
 
     public List<User> getByName(String name) {
-        String[] fullname = name.split(" ");
-        if(fullname.length == 1) {
-            return userRepository.filterByName(fullname[0]);
-        }
-        if(fullname.length == 2) {
-            return userRepository.filterByName(fullname[0], fullname[1]);
-        }
-        if(fullname.length == 3) {
-            return userRepository.filterByName(fullname[0], fullname[1], fullname[2]);
+        if (name != null) {
+            String search = name.replaceAll(",", " ").replaceAll("\\s+", " ").trim().toLowerCase();
+            return userRepository.filterByName(search);
         }
         throw new IllegalRequestDataException("invalid request");
     }

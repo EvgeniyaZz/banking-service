@@ -44,7 +44,7 @@ class UserControllerTest extends AbstractControllerTest {
 
     @Test
     void getByName() throws Exception {
-        performJwt(MockMvcRequestBuilders.get(REST_URL + "/by-name?name=" + "Евгения"), user)
+        performJwt(MockMvcRequestBuilders.get(REST_URL + "/by-name?name=" + " захарова,   Е"), user)
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
